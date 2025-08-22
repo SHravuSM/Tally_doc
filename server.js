@@ -75,7 +75,7 @@ import dotenv from "dotenv";
 dotenv.config(); // load .env variables
 
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT;
 
 // Middleware
 app.use(cors());
