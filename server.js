@@ -65,7 +65,6 @@
 //   console.log(`🚀 Backend running at http://localhost:${PORT}`);
 // });
 
-
 // server.js
 import express from "express";
 import bodyParser from "body-parser";
@@ -101,7 +100,7 @@ const tallySchema = new mongoose.Schema(
 const TallyData = mongoose.model("TallyData", tallySchema);
 
 // Route to receive data from agent
-app.post("/api/tally-data", async (req, res) => {
+app.post("/tally-data", async (req, res) => {
   try {
     const tallyData = req.body;
 
@@ -120,7 +119,7 @@ app.post("/api/tally-data", async (req, res) => {
 });
 
 // Route to fetch all saved data for frontend
-app.get("/api/tally-data", async (req, res) => {
+app.get("/tally-data", async (req, res) => {
   try {
     const data = await TallyData.find().sort({ createdAt: -1 });
     res.json(data);
@@ -128,6 +127,10 @@ app.get("/api/tally-data", async (req, res) => {
     console.error("❌ Error fetching Tally data:", error);
     res.status(500).json({ message: "Internal Server Error" });
   }
+});
+
+app.get("/", async (req, res) => {
+  res.end("helo");
 });
 
 // Start server
